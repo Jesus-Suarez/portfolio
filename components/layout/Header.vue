@@ -17,7 +17,7 @@
 					{{ theme === 'dark' ? '☀️' : '🌙' }}
 				</button>
 
-				<select v-model="locale" class="language-switcher">
+				<select v-model="selectedLocale" class="language-switcher">
 					<option value="en">English</option>
 					<option value="es">Español</option>
 				</select>
@@ -26,11 +26,12 @@
 	</header>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const selectedLocale: string = 'en';
+
 const colorMode = useColorMode()
 const theme = ref(colorMode.value)
-
-watch(colorMode, (newValue) => {
+watch(colorMode, (newValue:any) => {
 	theme.value = newValue
 })
 
