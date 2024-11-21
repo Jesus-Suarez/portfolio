@@ -13,7 +13,7 @@
 			</ul>
 
 			<div class="actions">
-				<button @click="toggleTheme" class="theme_switcher">
+				<button class="theme_switcher" @click="toggleTheme">
 					{{ theme === 'dark' ? '☀️' : '🌙' }}
 				</button>
 
