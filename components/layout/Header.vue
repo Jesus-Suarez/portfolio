@@ -6,32 +6,33 @@
 			</a>
 
 			<ul class="nav-links">
-				<li><a href="#about-me">About me</a></li>
-				<li><a href="#projects">Projects</a></li>
-				<li><a href="#Skills">Skill and Technologies</a></li>
-				<li><a href="#Experience">Experience</a></li>
+				<li><a href="#about-me">{{ $t('About me')}}</a></li>
+				<li><a href="#projects">{{ $t('Projects')}}</a></li>
+				<li><a href="#Skills">{{ $t('Welcome')}}</a></li>
+				<li><a href="#Experience">{{ $t('Experience')}}</a></li>
 			</ul>
 
 			<div class="actions">
 				<button class="theme_switcher" @click="toggleTheme">
 					{{ theme === 'dark' ? '☀️' : '🌙' }}
 				</button>
-
-				<select v-model="selectedLocale" class="language-switcher">
-					<option value="en">English</option>
-					<option value="es">Español</option>
-				</select>
+				<br>
+				<br>
+				<button @click="setLocale(locale === 'en' ? 'es' : 'en')">
+					{{ locale === 'en' ? 'Switch to Spanish' : 'Switch to English' }}
+				</button>
 			</div>
 		</nav>
 	</header>
 </template>
 
 <script setup lang="ts">
-const selectedLocale: string = 'en';
+const { setLocale, locale } = useI18n()
 
 const colorMode = useColorMode()
 const theme = ref(colorMode.value)
-watch(colorMode, (newValue:any) => {
+
+watch(colorMode, (newValue: any) => {
 	theme.value = newValue
 })
 

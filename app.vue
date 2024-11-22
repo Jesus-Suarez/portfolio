@@ -2,9 +2,7 @@
 
   <div class="layout">
     <Header />
-    <div class="main-content">
-
-    </div>
+    <div class="main-content"/>
     <Footer />
   </div>
 </template>

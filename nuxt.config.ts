@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxtjs/color-mode', '@nuxt/eslint'],
+  modules: ['@nuxt/ui', '@nuxtjs/color-mode', '@nuxt/eslint', '@nuxtjs/i18n'],
   typescript: {
     typeCheck: true
   },
@@ -16,5 +16,10 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'nuxt-color-mode'
+  },
+  i18n: {
+    vueI18n: './i18n.config.ts',
+    locales: ['en', 'es'],
+    defaultLocale:'en'
   }
 })
