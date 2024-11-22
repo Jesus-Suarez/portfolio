@@ -14,7 +14,7 @@
 
 			<div class="actions">
 				<button class="theme_switcher" @click="toggleTheme">
-					{{ theme === 'dark' ? '☀️' : '🌙' }}
+					 {{ colorMode.value === 'dark' ? '☀️' : '🌙' }}
 				</button>
 				<br>
 				<br>
@@ -51,5 +51,12 @@ body {
 .dark-mode body {
 	background-color: #091a28;
 	color: #ebf4f1;
+}
+
+.theme_switcher {
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	font-size: 1.5rem;
 }
 </style>
