@@ -6,7 +6,7 @@ export default defineI18nConfig(() => ({
 			Welcome: 'Welcome',
 		},
 		es: {
-			Welcome: 'Bienvenido',
+			Skills: 'Habilidades',
 			'About me': 'Acerca de',
 			Projects: 'Proyectos',
 			Experience:'Experiencia'

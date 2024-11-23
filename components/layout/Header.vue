@@ -1,28 +1,30 @@
 <template>
-	<header class="header">
-		<nav class="nav">
-			<a href="/" class="logo">
-				<img src="/" alt="Logo">
-			</a>
+	<header class="bg-gray-800 text-white shadow-md">
 
-			<ul class="nav-links">
-				<li><a href="#about-me">{{ $t('About me')}}</a></li>
-				<li><a href="#projects">{{ $t('Projects')}}</a></li>
-				<li><a href="#Skills">{{ $t('Welcome')}}</a></li>
-				<li><a href="#Experience">{{ $t('Experience')}}</a></li>
-			</ul>
+		<div class="container mx-auto flex items-center justify-between py-4 px-6">
+			<!-- Logo -->
+			<div class="text-2xl font-bold">
+				<a href="/">My portfolio</a>
+			</div>
 
-			<div class="actions">
-				<button class="theme_switcher" @click="toggleTheme">
-					 {{ colorMode.value === 'dark' ? '☀️' : '🌙' }}
+			<nav class="hidden md:flex space-x-6">
+				<a href="#about-me" class="hover:text-gray-300" transition>{{ $t('About me') }}</a>
+				<a href="#Skills" class="hover:text-gray-300" transition>{{ $t('Skills') }}</a>
+				<a href="#Experience" class="hover:text-gray-300" transition>{{ $t('Experience') }}</a>
+				<a href="#projects" class="hover:text-gray-300" transition>{{ $t('Projects') }}</a>
+			</nav>
+
+			<div class="flex items-center space-x-4">
+				<button class="text-xl" @click="toggleTheme">
+					{{ colorMode.value === 'dark' ? '☀️' : '🌙' }}
 				</button>
-				<br>
-				<br>
-				<button @click="setLocale(locale === 'en' ? 'es' : 'en')">
-					{{ locale === 'en' ? 'Switch to Spanish' : 'Switch to English' }}
+
+				<button class="text-sm" @click="setLocale(locale === 'en' ? 'es' : 'en')">
+					{{ locale === 'en' ? 'ES' : 'EN' }}
 				</button>
 			</div>
-		</nav>
+		</div>
+
 	</header>
 </template>
 
@@ -39,24 +41,4 @@ watch(colorMode, (newValue: any) => {
 const toggleTheme = () => {
 	colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
 }
-
 </script>
-
-<style>
-body {
-	background-color: #fff;
-	color: rgba(0, 0, 0, 0.8);
-}
-
-.dark-mode body {
-	background-color: #091a28;
-	color: #ebf4f1;
-}
-
-.theme_switcher {
-	border: none;
-	background: transparent;
-	cursor: pointer;
-	font-size: 1.5rem;
-}
-</style>
