@@ -26,33 +26,33 @@
 					class="absolute top-16 left-0 w-full bg-gray-800 p-6 md:static md:w-auto md:p-0 md:flex-row"
 				>
 				<a
-					href="#about-me" 
+					href="#" 
 					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition"
 					@click="closeMobileMenu"
 				>
 					{{ $t('About me')}}
 				</a>
 				<a 
-					href="#Skills"
+					href="#skills"
 					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
 					@click="closeMobileMenu"
 				>
 					{{ $t('Skills')}}
 				</a>
 				<a 
-					href="#Experience" 
-					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
-					@click="closeMobileMenu"
+				href="#projects"
+				class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition"
+				@click="closeMobileMenu"
 				>
-					{{ $t('Experience') }}
-				</a>
-				<a 
-					href="#projects"
-					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition"
-					@click="closeMobileMenu"
-				>
-					{{ $t('Projects')}}
-				</a>
+				{{ $t('Projects')}}
+			</a>
+			<a 
+				href="#contact" 
+				class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
+				@click="closeMobileMenu"
+			>
+				{{ $t('Contacto') }}
+			</a>
 			</div>
 
 			<!-- Theme and Language Switcher -->

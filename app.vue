@@ -3,23 +3,135 @@
     <!-- Header -->
     <Header />
 
+    <!-- Navigation -->
+    <UHeader class="border-b dark:border-gray-800">
+      <template #left>
+        <h1 class="font-bold text-xl">Portfolio</h1>
+      </template>
+      <template #right>
+        <UButton 
+          v-for="item in navigation" 
+          :key="item.name"
+          variant="ghost"
+          :to="item.href"
+        >
+          {{ item.name }}
+        </UButton>
+      </template>
+    </UHeader>
+
     <!-- Main Content -->
     <main class="container mx-auto flex-grow px-4">
-     <section class="py-20">
-      <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-4xl font-bold mb-6">Full Stack Software Engineer</h1>
-          <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Passionate about building scalable applications and solving complex problems
-          </p>
-          <div class="flex justify-center gap-4">
-            <UButton color="primary" to="#projects">View Projects</UButton>
-            <UButton color="gray" to="#contact">Contact Me</UButton>
+      <section class="py-20">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-6">Full Stack Software Engineer</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+              Passionate about building scalable applications and solving complex problems
+            </p>
+            <div class="flex justify-center gap-4">
+              <UButton color="primary" to="#projects">View Projects</UButton>
+              <UButton color="gray" to="#contact">Contact Me</UButton>
+            </div>
           </div>
+        </div>
+      </section>
+    </main>
+
+     <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-white dark:bg-gray-800">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Technical Skills</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <UCard v-for="(category, index) in skills" :key="index">
+            <template #header>
+              <h3 class="text-xl font-semibold">{{ category.title }}</h3>
+            </template>
+            <div class="space-y-2">
+              <UBadge
+                v-for="skill in category.items"
+                :key="skill"
+                color="primary"
+                class="mr-2"
+              >
+                {{ skill }}
+              </UBadge>
+            </div>
+          </UCard>
         </div>
       </div>
     </section>
-    </main>
+
+     <!-- Projects Section -->
+    <section id="projects" class="py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <UCard
+            v-for="project in projects"
+            :key="project.title"
+          >
+            <template #header>
+              <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover">
+            </template>
+            <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">{{ project.description }}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <UBadge
+                v-for="tech in project.technologies"
+                :key="tech"
+                color="gray"
+              >
+                {{ tech }}
+              </UBadge>
+            </div>
+            <template #footer>
+              <div class="flex justify-between">
+                <UButton
+                  v-if="project.demo"
+                  color="primary"
+                  :to="project.demo"
+                  target="_blank"
+                >
+                  Live Demo
+                </UButton>
+                <UButton
+                  v-if="project.github"
+                  color="gray"
+                  :to="project.github"
+                  target="_blank"
+                >
+                  GitHub
+                </UButton>
+              </div>
+            </template>
+          </UCard>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white dark:bg-gray-800">
+    <div class="container mx-auto px-4 max-w-2xl">
+      <h2 class="text-3xl font-bold text-center mb-12">Get In Touch</h2>
+      <UForm :state="form" @submit="onContactSubmit">
+        <UFormGroup label="Name">
+          <UInput v-model="form.name" />
+        </UFormGroup>
+        <UFormGroup label="Email">
+          <UInput v-model="form.email" type="email" />
+        </UFormGroup>
+        <UFormGroup label="Message">
+          <UTextarea v-model="form.message" :rows="5" />
+        </UFormGroup>
+        <div class="text-center">
+          <UButton type="submit" color="primary" size="lg">
+            Send Message
+          </UButton>
+        </div>
+      </UForm>
+    </div>
+  </section>
 
     <!-- Footer -->
     <Footer />
@@ -30,4 +142,79 @@
 import Footer from './components/layout/Footer.vue';
 import Header from './components/layout/Header.vue';
 
+// types/index.ts
+interface NavigationItem {
+  name: string;
+  href: string;
+}
+
+interface Skill {
+  title: string;
+  items: string[];
+}
+
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  demo?: string;
+  github?: string;
+}
+
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+const navigation: NavigationItem[] = [
+  { name: 'Home', href: '#' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' }
+];
+
+const skills: Skill[] = [
+  {
+    title: 'Frontend',
+    items: ['Vue.js', 'Nuxt', 'React', 'TypeScript', 'Tailwind CSS']
+  },
+  {
+    title: 'Backend',
+    items: ['Node.js', 'Python', 'Java', 'PostgreSQL', 'MongoDB']
+  },
+  {
+    title: 'DevOps & Tools',
+    items: ['Git', 'Docker', 'AWS', 'CI/CD', 'Linux']
+  }
+];
+
+const projects: Project[] = [
+  {
+    title: 'Project One',
+    description: 'A full-stack application built with Vue.js and Node.js',
+    image: '/api/placeholder/600/400',
+    technologies: ['Vue.js', 'Node.js', 'MongoDB'],
+    demo: 'https://demo.com',
+    github: 'https://github.com'
+  }
+  // Add more projects as needed
+];
+
+// Contact form with TypeScript
+const form = reactive<ContactForm>({
+  name: '',
+  email: '',
+  message: ''
+});
+
+// Type-safe form submission handler
+const onContactSubmit = async (formData: ContactForm): Promise<void> => {
+  try {
+    console.log('Form submitted:', formData);
+    // Add your form submission logic here
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
 </script>

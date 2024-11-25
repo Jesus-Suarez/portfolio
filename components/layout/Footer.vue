@@ -19,9 +19,13 @@
 </template>
 
 <script setup lang="ts">
-const socials = [
-  { name: 'GitHub', url: 'https://github.com/Jesus-Suarez' },
-  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/jesus-suarz/' },
-];
+interface Social {
+  name: string;
+  url: string;
+}
 
+const socials: Social[] = [
+  { name: 'GitHub', url: 'https://github.com/Jesus-Suarez' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/jesus-suarz/' }
+];
 </script>
