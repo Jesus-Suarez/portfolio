@@ -3,23 +3,6 @@
     <!-- Header -->
     <Header />
 
-    <!-- Navigation -->
-    <UHeader class="border-b dark:border-gray-800">
-      <template #left>
-        <h1 class="font-bold text-xl">Portfolio</h1>
-      </template>
-      <template #right>
-        <UButton 
-          v-for="item in navigation" 
-          :key="item.name"
-          variant="ghost"
-          :to="item.href"
-        >
-          {{ item.name }}
-        </UButton>
-      </template>
-    </UHeader>
-
     <!-- Main Content -->
     <main class="container mx-auto flex-grow px-4">
       <section class="py-20">

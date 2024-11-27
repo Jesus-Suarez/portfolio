@@ -1,5 +1,5 @@
 <template>
-	<header class="bg-gray-800 text-white shadow-md">
+	<header class="sticky top-0 z-50 shadow-md dark:bg-slate-800  bg-white">
 		<div class="container mx-auto flex items-center justify-between py-4 px-6">
 			<!-- Logo -->
 			<div class="text-2xl font-bold">
@@ -23,7 +23,7 @@
 					'block': mobileMenuOpen,
 					'md:flex': true,
 					}"
-					class="absolute top-16 left-0 w-full bg-gray-800 p-6 md:static md:w-auto md:p-0 md:flex-row"
+					class="absolute top-16 left-0 w-full p-6 md:static md:w-auto md:p-0 md:flex-row"
 				>
 				<a
 					href="#" 
@@ -57,10 +57,17 @@
 
 			<!-- Theme and Language Switcher -->
 			<div class="hidden md:flex items-center space-x-4">
-				<!--Theme toggle-->
-				<button class="text-xl" @click="toggleTheme">
-					{{ colorMode.value === 'dark' ? '☀️' : '🌙' }}
-				</button>
+				<UFormGroup name="toggle" label="">
+					<UTooltip text="Color theme">
+						<UToggle 
+							:model-value="isDarkMode"
+							on-icon="i-heroicons-moon-20-solid"
+							off-icon="i-heroicons-sun-20-solid"
+							size="lg"
+							@update:model-value="toggleTheme"						
+						/>
+					</UTooltip>
+				</UFormGroup>
 
 				<!--Language toggle -->
 				<button class="text-sm" @click="setLocale(locale === 'en' ? 'es' : 'en')">
@@ -77,15 +84,17 @@ const { setLocale, locale } = useI18n()
 
 // Color mode setup
 const colorMode = useColorMode()
-const theme = ref(colorMode.value)
-
-watch(colorMode, (newValue: any) => {
-	theme.value = newValue
-})
+const isDarkMode = ref(colorMode.preference ==='dark')
 
 const toggleTheme = () => {
-	colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+	colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+
+	isDarkMode.value = colorMode.preference === 'dark'
 }
+
+watch(() => colorMode.preference, (newValue: any) => {
+	isDarkMode.value = newValue === 'dark'
+})
 
 // Mobile menu state
 const mobileMenuOpen = ref(false);
