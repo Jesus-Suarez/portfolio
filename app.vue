@@ -8,13 +8,13 @@
       <section class="py-20">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-6">Full Stack Software Engineer</h1>
+            <h1 class="text-4xl font-bold mb-6">{{ $t('Full Stack Software Engineer') }}</h1>
             <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
               Passionate about building scalable applications and solving complex problems
             </p>
             <div class="flex justify-center gap-4">
-              <UButton color="primary" to="#projects">View Projects</UButton>
-              <UButton color="gray" to="#contact">Contact Me</UButton>
+              <UButton color="primary" to="#projects">{{ $t('View Projects') }}</UButton>
+              <UButton color="gray" to="#contact">{{ $t('Contact Me') }}</UButton>
             </div>
           </div>
         </div>
@@ -22,13 +22,13 @@
     </main>
 
      <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-white dark:bg-gray-800">
+    <section id="skills" class="py-12 bg-white dark:bg-gray-800">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Technical Skills</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <h2 class="text-3xl font-bold text-center mb-12">{{ $t('Technical Skills') }}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <UCard v-for="(category, index) in skills" :key="index">
             <template #header>
-              <h3 class="text-xl font-semibold">{{ category.title }}</h3>
+              <h3 class="text-xl font-semibold">{{ $t(category.title) }}</h3>
             </template>
             <div class="space-y-2">
               <UBadge
@@ -37,7 +37,7 @@
                 color="primary"
                 class="mr-2"
               >
-                {{ skill }}
+                {{ $t(skill) }}
               </UBadge>
             </div>
           </UCard>
@@ -48,7 +48,7 @@
      <!-- Projects Section -->
     <section id="projects" class="py-16">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">{{ $t('Featured Projects') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <UCard
             v-for="project in projects"
@@ -57,8 +57,8 @@
             <template #header>
               <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover">
             </template>
-            <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">{{ project.description }}</p>
+            <h3 class="text-xl font-semibold mb-2">{{ $t(project.title) }}</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $t(project.description) }}</p>
             <div class="flex flex-wrap gap-2 mb-4">
               <UBadge
                 v-for="tech in project.technologies"
@@ -76,7 +76,7 @@
                   :to="project.demo"
                   target="_blank"
                 >
-                  Live Demo
+                  {{ $t('Live Demo')}}
                 </UButton>
                 <UButton
                   v-if="project.github"
@@ -125,12 +125,6 @@
 import Footer from './components/layout/Footer.vue';
 import Header from './components/layout/Header.vue';
 
-// types/index.ts
-interface NavigationItem {
-  name: string;
-  href: string;
-}
-
 interface Skill {
   title: string;
   items: string[];
@@ -150,25 +144,23 @@ interface ContactForm {
   email: string;
   message: string;
 }
-const navigation: NavigationItem[] = [
-  { name: 'Home', href: '#' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' }
-];
 
 const skills: Skill[] = [
   {
     title: 'Frontend',
-    items: ['Vue.js', 'Nuxt', 'React', 'TypeScript', 'Tailwind CSS']
+    items: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'HTML/CSS']
   },
   {
     title: 'Backend',
-    items: ['Node.js', 'Python', 'Java', 'PostgreSQL', 'MongoDB']
+    items: ['Node.js', 'SQL', 'Typescript', 'C#']
   },
   {
     title: 'DevOps & Tools',
     items: ['Git', 'Docker', 'AWS', 'CI/CD', 'Linux']
+  },
+  {
+    title: 'Another skills',
+    items: ['Clean Architecture', 'Problem Solving', 'Scrum Methodologies', 'SOLID Principles', 'Object Oriented Programming']
   }
 ];
 

@@ -1,5 +1,5 @@
 <template>
-	<header class="sticky top-0 z-50 shadow-md dark:bg-slate-800  bg-white">
+	<header class="sticky top-0 z-50 shadow-md bg-transparent/70 bg-white backdrop-blur">
 		<div class="container mx-auto flex items-center justify-between py-4 px-6">
 			<!-- Logo -->
 			<div class="text-2xl font-bold">
@@ -19,40 +19,21 @@
 			<!-- Navigation Links -->
 				<div
 					:class="{
-					'hidden': !mobileMenuOpen,
-					'block': mobileMenuOpen,
-					'md:flex': true,
+						'hidden': !mobileMenuOpen,
+						'block': mobileMenuOpen,
+						'md:flex': true
 					}"
-					class="absolute top-16 left-0 w-full p-6 md:static md:w-auto md:p-0 md:flex-row"
+					class="absolute top-16 left-0 w-full p-6 md:static md:w-auto md:p-0 md:flex-row bg-transparent/70"
 				>
-				<a
-					href="#" 
-					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition"
-					@click="closeMobileMenu"
-				>
-					{{ $t('About me')}}
-				</a>
 				<a 
-					href="#skills"
+					v-for="item in navigation"
+					:key="item.name"
+					:href="item.href"
 					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
 					@click="closeMobileMenu"
 				>
-					{{ $t('Skills')}}
+					{{ $t(item.name)}}
 				</a>
-				<a 
-				href="#projects"
-				class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition"
-				@click="closeMobileMenu"
-				>
-				{{ $t('Projects')}}
-			</a>
-			<a 
-				href="#contact" 
-				class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
-				@click="closeMobileMenu"
-			>
-				{{ $t('Contacto') }}
-			</a>
 			</div>
 
 			<!-- Theme and Language Switcher -->
@@ -95,6 +76,18 @@ const toggleTheme = () => {
 watch(() => colorMode.preference, (newValue: any) => {
 	isDarkMode.value = newValue === 'dark'
 })
+
+interface NavigationItem {
+  name: string;
+  href: string;
+}
+
+const navigation: NavigationItem[] = [
+  { name: 'Home', href: '#' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Contact', href: '#contact' }
+];
 
 // Mobile menu state
 const mobileMenuOpen = ref(false);
