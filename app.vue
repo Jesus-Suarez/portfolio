@@ -6,10 +6,10 @@
     <!-- Main Content -->
     <main class="container mx-auto flex-grow px-4">
       <section class="py-20">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-6">{{ $t('Full Stack Software Engineer') }}</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        <div class="container mx-auto px-6">
+          <div class="relative h-16 max-w-3xl mx-auto text-center">
+            <h1 class="absolute typing-text text-4xl font-bold mb-6">{{ $t(currentText) }}</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
               Passionate about building scalable applications and solving complex problems
             </p>
             <div class="flex justify-center gap-4">
@@ -28,7 +28,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <UCard v-for="(category, index) in skills" :key="index">
             <template #header>
-              <h3 class="text-xl font-semibold">{{ $t(category.title) }}</h3>
+              <h3 class="text-xl font-semibold text-center">{{ $t(category.title) }}</h3>
             </template>
             <div class="space-y-2">
               <UBadge
@@ -192,4 +192,56 @@ const onContactSubmit = async (formData: ContactForm): Promise<void> => {
     console.error('Error submitting form:', error);
   }
 };
+
+const texts = ['Full Stack Software Engineer', 'Backend Engineer', 'Frontend Engineer']
+const currentText = ref('')
+let currentIndex = 0
+let textIndex = 0
+
+function typeText() {
+  if (textIndex < texts[currentIndex].length) {
+    currentText.value += texts[currentIndex].charAt(textIndex)
+    textIndex++
+    setTimeout(typeText, 100)
+  } else {
+    setTimeout(eraseText, 2000)
+  }
+}
+
+function eraseText() {
+  if (textIndex > 0) {
+    currentText.value = texts[currentIndex].substring(0, textIndex - 1)
+    textIndex--
+    setTimeout(eraseText, 50)
+  } else {
+    currentIndex = (currentIndex + 1) % texts.length
+    setTimeout(typeText, 500)
+  }
+}
+
+onMounted(() => {
+  typeText()
+})
 </script>
+
+<style scoped>
+.typing-text {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.typing-text::after {
+  content: '|';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -10px; /* Adjust this value to fine-tune position */
+  animation: blink 0.7s steps(2) infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+</style>

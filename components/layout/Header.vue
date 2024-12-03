@@ -1,5 +1,5 @@
 <template>
-	<header class="sticky top-0 z-50 shadow-md bg-transparent/70 bg-white backdrop-blur">
+	<header class="sticky top-0 z-50 shadow-md dark:bg-transparent/70 backdrop-blur">
 		<div class="container mx-auto flex items-center justify-between py-4 px-6">
 			<!-- Logo -->
 			<div class="text-2xl font-bold">
@@ -21,15 +21,16 @@
 					:class="{
 						'hidden': !mobileMenuOpen,
 						'block': mobileMenuOpen,
-						'md:flex': true
+						'md:flex': true,
+						'bg-white/80 dark:bg-transparent/70': mobileMenuOpen,
 					}"
-					class="absolute top-16 left-0 w-full p-6 md:static md:w-auto md:p-0 md:flex-row bg-transparent/70"
+					class="absolute top-16 left-0 w-full p-6 md:static md:w-auto md:p-0 md:flex-row"
 				>
 				<a 
 					v-for="item in navigation"
 					:key="item.name"
 					:href="item.href"
-					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-300 transition" 
+					class="block py-2 text-lg md:py-0 md:ml-6 hover:text-gray-400 transition backdrop-blur" 
 					@click="closeMobileMenu"
 				>
 					{{ $t(item.name)}}
@@ -44,16 +45,18 @@
 							:model-value="isDarkMode"
 							on-icon="i-heroicons-moon-20-solid"
 							off-icon="i-heroicons-sun-20-solid"
-							size="lg"
+							size="sm"
 							@update:model-value="toggleTheme"						
 						/>
 					</UTooltip>
 				</UFormGroup>
 
 				<!--Language toggle -->
-				<button class="text-sm" @click="setLocale(locale === 'en' ? 'es' : 'en')">
-					{{ locale === 'en' ? 'ES' : 'EN' }}
-				</button>
+				<UTooltip text="Choose language">
+					<UButton size="xs" variant="ghost" color="gray" class="text-sm" @click="setLocale(locale === 'en' ? 'es' : 'en')">
+						{{ locale === 'en' ? 'ES' : 'EN' }}
+					</UButton>
+				</UTooltip>
 			</div>
 
 		</div>
